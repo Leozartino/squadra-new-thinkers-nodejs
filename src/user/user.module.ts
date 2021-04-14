@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserController } from './user.controller';
 import { User } from './user.model';
@@ -9,5 +9,6 @@ import { TaskModule } from './task/task.module';
     imports: [SequelizeModule.forFeature([User]), TaskModule],
     controllers: [UserController],
     providers: [UserService],
+    exports: [UserService]
 })
 export class UserModule { }

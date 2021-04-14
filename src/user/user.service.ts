@@ -1,8 +1,11 @@
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { FindUsersDto } from './dto/find-users.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { DeleteTaskDto } from './task/dto/delete-task.dto';
+import { Task } from './task/task.model';
+import { TaskService } from './task/task.service';
 import { User } from './user.model';
 
 @Injectable()
@@ -41,6 +44,10 @@ export class UserService {
         }
 
         return this.userModel.findAll({ where });
+    }
+
+    findUserById(id: number) {
+        return this.userModel.findOne({ where: { id } });
     }
 
     deleteUser(id: number) {
